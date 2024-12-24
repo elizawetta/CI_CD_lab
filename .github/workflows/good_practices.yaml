@@ -1,0 +1,43 @@
+name: Good Practices
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: check code
+        uses: actions/checkout@v3
+      - name: set up python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      - name: install deps
+        run: pip install pytest
+  test:
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+    steps:
+      - - name: check code
+      - uses: actions/checkout@v3
+      - name: set up python
+      - uses: actions/setup-python@v3
+      - with:
+          python-version: '3.9'
+      - name: install deps
+      - run: pip install pytest
+      - name: run tests
+      - run: python -m pytest
+  deploy:
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+      - test
