@@ -26,7 +26,7 @@ jobs:
     needs:
       - build
     steps:
-      - - name: check code
+      - name: check code
       - uses: actions/checkout@v3
       - name: set up python
       - uses: actions/setup-python@v3
